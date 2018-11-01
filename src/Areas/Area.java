@@ -15,7 +15,7 @@ public class Area
 
     public void enterArea(Player x)
     {
-        System.out.println("You are in an uneventful area");
+        System.out.println("You are nowhere");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
