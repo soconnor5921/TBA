@@ -43,6 +43,12 @@ public class Runner
         }
     }
 
+    /**
+     * Creates a map of the area and shows where certain things are such as the player
+     * @param map
+     * @param p
+     * @return
+     */
     public static String printMap(Area[][] map, Player p)
     {
         String printedMap = "";
@@ -65,6 +71,13 @@ public class Runner
         return printedMap;
     }
 
+    /**
+     * Checks if the player's move is valid and if it is, moves the player to that location
+     * @param move
+     * @param p
+     * @param map
+     * @return
+     */
     public static boolean canMove(String move, Player p, Area[][] map)
     {
         move = move.toLowerCase().trim();
