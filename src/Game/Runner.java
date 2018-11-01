@@ -4,6 +4,10 @@ import People.Player;
 import Areas.Area;
 import java.util.Scanner;
 
+/**
+ * Make it so you can press M to show the map and so it doesn't tell you to stay in the playable area if you type M or other buttons TBD
+ */
+
 public class Runner
 {
     private static boolean gameOn = true;
@@ -30,7 +34,7 @@ public class Runner
         {
             System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
             String move = in.nextLine();
-            if(canMove(move, player1, town))
+            if(canMove(move, player1))
             {
                 System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
                 String map = printMap(town, player1);
@@ -45,9 +49,9 @@ public class Runner
 
     /**
      * Creates a map of the area and shows where certain things are such as the player
-     * @param map
-     * @param p
-     * @return
+     * @param map the 2D array of areas
+     * @param p the player
+     * @return the full created map
      */
     public static String printMap(Area[][] map, Player p)
     {
@@ -73,12 +77,11 @@ public class Runner
 
     /**
      * Checks if the player's move is valid and if it is, moves the player to that location
-     * @param move
-     * @param p
-     * @param map
-     * @return
+     * @param move the player's desired direction
+     * @param p the player
+     * @return true if the move is valid, false if it's not
      */
-    public static boolean canMove(String move, Player p, Area[][] map)
+    public static boolean canMove(String move, Player p)
     {
         move = move.toLowerCase().trim();
         int x = p.getxLoc();
