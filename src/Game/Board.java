@@ -6,7 +6,6 @@ import Rooms.Room;
 public class Board
 {
     private Room[][] map;
-    private Room[][] roomsVisited;
 
     public Board(Room[][] x)
     {

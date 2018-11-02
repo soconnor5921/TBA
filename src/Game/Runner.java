@@ -24,7 +24,6 @@ public class Runner
             }
         }
 
-
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
