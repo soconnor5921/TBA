@@ -1,19 +1,19 @@
-package Areas;
+package Rooms;
 
 import People.Player;
 
-public class Area
+public class Room
 {
     Player occupant;
     int xLoc, yLoc;
 
-    public Area(int x, int y)
+    public Room(int x, int y)
     {
         xLoc = x;
         yLoc = y;
     }
 
-    public void enterArea(Player x)
+    public void enterRoom(Player x)
     {
         System.out.println("You are nowhere");
         occupant = x;

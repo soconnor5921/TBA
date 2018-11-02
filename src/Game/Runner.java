@@ -1,7 +1,8 @@
 package Game;
 
 import People.Player;
-import Areas.Area;
+import Rooms.Room;
+import Game.Board;
 import java.util.Scanner;
 
 /**
@@ -14,14 +15,15 @@ public class Runner
 
     public static void main(String[] args)
     {
-        Area[][] town = new Area[5][5];
-        for(int x = 0; x < town.length; x++)
+        Room[][] building = new Room[5][5];
+        for(int x = 0; x < building.length; x++)
         {
-            for(int y = 0; y < town[x].length; y++)
+            for(int y = 0; y < building[x].length; y++)
             {
-                town[x][y] = new Area(x,y);
+                building[x][y] = new Room(x,y);
             }
         }
+
 
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
@@ -34,10 +36,15 @@ public class Runner
         {
             System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
             String move = in.nextLine();
+            move = move.trim();
+            String map = Board.printMap(building, player1);
             if(canMove(move, player1))
             {
                 System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
-                String map = printMap(town, player1);
+                //System.out.println(map);
+            }
+            else if(move.equalsIgnoreCase("m"))
+            {
                 System.out.println(map);
             }
             else
@@ -48,34 +55,6 @@ public class Runner
     }
 
     /**
-     * Creates a map of the area and shows where certain things are such as the player
-     * @param map the 2D array of areas
-     * @param p the player
-     * @return the full created map
-     */
-    public static String printMap(Area[][] map, Player p)
-    {
-        String printedMap = "";
-        for(int i = 0; i < map.length; i++)
-        {
-            for(int j = 0; j < map[i].length; j++)
-            {
-                if(i == p.getxLoc() && j == p.getyLoc())
-                {
-                    printedMap += "[P]";
-                }
-                else
-                {
-                    printedMap += "[?]";
-                }
-            }
-            printedMap += "\n";
-        }
-        printedMap += "Index : P - Player";
-        return printedMap;
-    }
-
-    /**
      * Checks if the player's move is valid and if it is, moves the player to that location
      * @param move the player's desired direction
      * @param p the player
@@ -83,7 +62,7 @@ public class Runner
      */
     public static boolean canMove(String move, Player p)
     {
-        move = move.toLowerCase().trim();
+        move = move.toLowerCase();
         int x = p.getxLoc();
         int y = p.getyLoc();
 
