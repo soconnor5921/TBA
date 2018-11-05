@@ -35,7 +35,7 @@ public class Board
         {
             for(int j = 0; j < map[i].length; j++)
             {
-                if(i == p.getxLoc() && j == p.getyLoc())
+                if (i == p.getxLoc() && j == p.getyLoc())
                 {
                     printedMap += "[P]";
                 }
