@@ -17,9 +17,15 @@ public class Room
     public void enterRoom(Player x)
     {
         System.out.println("You are nowhere");
-        roomChar = "[-]";
+        roomChar = "[P]";
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+    }
+
+    public void leaveRoom(Player x)
+    {
+        occupant = null;
+        roomChar = "[-]";
     }
 }

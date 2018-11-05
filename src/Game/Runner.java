@@ -38,7 +38,7 @@ public class Runner
             move = move.trim();
             String map = Board.printMap(building, player1);
 
-            if(canMove(move, player1))
+            if(canMove(move, player1, building))
             {
                 System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
                 //System.out.println(map);
@@ -59,8 +59,40 @@ public class Runner
      * @param move the player's desired direction
      * @param p the player
      * @return true if the move is valid, false if it's not
-     */
+     *
     public static boolean canMove(String move, Player p)
+    {
+        move = move.toLowerCase();
+        int x = p.getxLoc();
+        int y = p.getyLoc();
+
+        if(move.equals("w") && x != 0)
+        {
+            p.setxLoc(p.getxLoc()-1);
+            return true;
+        }
+        else if(move.equals("a") && y != 0)
+        {
+            p.setyLoc(p.getyLoc()-1);
+            return true;
+        }
+        else if(move.equals("s") && x != 4)
+        {
+            p.setxLoc(p.getxLoc()+1);
+            return true;
+        }
+        else if(move.equals("d") && y != 4)
+        {
+            p.setyLoc(p.getyLoc()+1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+        */
+    public static boolean canMove(String move, Player p, Room[][] map)
     {
         move = move.toLowerCase();
         int x = p.getxLoc();
