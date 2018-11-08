@@ -16,4 +16,9 @@ public class HintRoom extends Room
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
     }
+
+    public void leaveRoom()
+    {
+        occupant = null;
+    }
 }

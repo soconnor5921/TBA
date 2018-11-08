@@ -27,10 +27,6 @@ public class Runner
         int y = (int)(Math.random()*building.length);
         building[x][y] = new WinningRoom(x,y);
 
-        int a = (int)(Math.random()*building.length);
-        int b = (int)(Math.random()*building.length);
-        building[a][b] = new HintRoom(x,y);
-
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
