@@ -1,6 +1,7 @@
 package Game;
 
 import People.Player;
+import Rooms.HintRoom;
 import Rooms.Room;
 import Game.Board;
 import Rooms.WinningRoom;
@@ -25,6 +26,10 @@ public class Runner
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
         building[x][y] = new WinningRoom(x,y);
+
+        int a = (int)(Math.random()*building.length);
+        int b = (int)(Math.random()*building.length);
+        building[a][b] = new HintRoom(x,y);
 
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
