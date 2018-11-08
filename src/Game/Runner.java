@@ -3,11 +3,9 @@ package Game;
 import People.Player;
 import Rooms.Room;
 import Game.Board;
-import java.util.Scanner;
+import Rooms.WinningRoom;
 
-/**
- * Make it so you can press M to show the map and so it doesn't tell you to stay in the playable area if you type M or other buttons TBD
- */
+import java.util.Scanner;
 
 public class Runner
 {
@@ -23,6 +21,10 @@ public class Runner
                 building[x][y] = new Room(x,y);
             }
         }
+
+        int x = (int)(Math.random()*building.length);
+        int y = (int)(Math.random()*building.length);
+        building[x][y] = new WinningRoom(x,y);
 
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
@@ -59,39 +61,7 @@ public class Runner
      * @param move the player's desired direction
      * @param p the player
      * @return true if the move is valid, false if it's not
-     *
-    public static boolean canMove(String move, Player p)
-    {
-        move = move.toLowerCase();
-        int x = p.getxLoc();
-        int y = p.getyLoc();
-
-        if(move.equals("w") && x != 0)
-        {
-            p.setxLoc(p.getxLoc()-1);
-            return true;
-        }
-        else if(move.equals("a") && y != 0)
-        {
-            p.setyLoc(p.getyLoc()-1);
-            return true;
-        }
-        else if(move.equals("s") && x != 4)
-        {
-            p.setxLoc(p.getxLoc()+1);
-            return true;
-        }
-        else if(move.equals("d") && y != 4)
-        {
-            p.setyLoc(p.getyLoc()+1);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-        */
+     */
     public static boolean canMove(String move, Player p, Room[][] map)
     {
         move = move.toLowerCase();
@@ -100,27 +70,36 @@ public class Runner
 
         if(move.equals("w") && x != 0)
         {
-            p.setxLoc(p.getxLoc()-1);
+            map[p.getxLoc()][p.getyLoc()].leaveRoom();
+            map[p.getxLoc()-1][p.getyLoc()].enterRoom(p);
             return true;
         }
         else if(move.equals("a") && y != 0)
         {
-            p.setyLoc(p.getyLoc()-1);
+            map[p.getxLoc()][p.getyLoc()].leaveRoom();
+            map[p.getxLoc()][p.getyLoc()-1].enterRoom(p);
             return true;
         }
         else if(move.equals("s") && x != 4)
         {
-            p.setxLoc(p.getxLoc()+1);
+            map[p.getxLoc()][p.getyLoc()].leaveRoom();
+            map[p.getxLoc()+1][p.getyLoc()].enterRoom(p);
             return true;
         }
         else if(move.equals("d") && y != 4)
         {
-            p.setyLoc(p.getyLoc()+1);
+            map[p.getxLoc()][p.getyLoc()].leaveRoom();
+            map[p.getxLoc()][p.getyLoc()+1].enterRoom(p);
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    public static void gameOff()
+    {
+        gameOn = false;
     }
 }
