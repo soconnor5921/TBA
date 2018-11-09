@@ -47,7 +47,7 @@ public class Board
             }
             printedMap += "\n";
         }
-        printedMap += "Index : P - Player";
+        printedMap += "Index : P - Player \nHealth = " + p.health ;
         return printedMap;
     }
 }
