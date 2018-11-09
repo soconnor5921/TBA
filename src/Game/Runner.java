@@ -23,6 +23,8 @@ public class Runner
             }
         }
 
+
+
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
         building[x][y] = new WinningRoom(x,y);
@@ -34,21 +36,24 @@ public class Runner
         //Set up player
         Player player1 = new Player(name, 0, 0);
 
+        System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
+        System.out.println(Board.printMap(building, player1));
+
         while(gameOn)
         {
-            System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
+            //System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
             String move = in.nextLine();
             move = move.trim();
-            String map = Board.printMap(building, player1);
+
 
             if(canMove(move, player1, building))
             {
                 System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
-                //System.out.println(map);
+                System.out.println(Board.printMap(building, player1));
             }
             else if(move.equalsIgnoreCase("m"))
             {
-                System.out.println(map);
+                System.out.println(Board.printMap(building, player1));
             }
             else
             {
@@ -71,26 +76,26 @@ public class Runner
 
         if(move.equals("w") && x != 0)
         {
-            map[p.getxLoc()][p.getyLoc()].leaveRoom();
-            map[p.getxLoc()-1][p.getyLoc()].enterRoom(p);
+            map[x][y].leaveRoom();
+            map[x-1][y].enterRoom(p);
             return true;
         }
         else if(move.equals("a") && y != 0)
         {
-            map[p.getxLoc()][p.getyLoc()].leaveRoom();
-            map[p.getxLoc()][p.getyLoc()-1].enterRoom(p);
+            map[x][y].leaveRoom();
+            map[x][y-1].enterRoom(p);
             return true;
         }
         else if(move.equals("s") && x != 4)
         {
-            map[p.getxLoc()][p.getyLoc()].leaveRoom();
-            map[p.getxLoc()+1][p.getyLoc()].enterRoom(p);
+           map[x][y].leaveRoom();
+           map[x+1][y].enterRoom(p);
             return true;
         }
         else if(move.equals("d") && y != 4)
         {
-            map[p.getxLoc()][p.getyLoc()].leaveRoom();
-            map[p.getxLoc()][p.getyLoc()+1].enterRoom(p);
+            map[x][y].leaveRoom();
+            map[x][y+1].enterRoom(p);
             return true;
         }
         else
