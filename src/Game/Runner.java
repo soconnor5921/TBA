@@ -56,11 +56,6 @@ public class Runner
             String move = in.nextLine();
             move = move.trim();
 
-            if(player1.health == 0)
-            {
-                gameOff();
-            }
-
             if(player1.inCombat)
             {
                 if(move.equalsIgnoreCase("f"))
@@ -97,6 +92,11 @@ public class Runner
                     System.out.println("Please stay in the playable area. Pick another direction");
                 }
 
+            }
+
+            if(player1.health == 0)
+            {
+                gameOff();
             }
 
         }
