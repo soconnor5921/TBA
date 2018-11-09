@@ -25,7 +25,7 @@ public class Runner
         }
 
 
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 10; i++)
         {
             int a = (int) (Math.random() * building.length);
             int b = (int) (Math.random() * building.length);
