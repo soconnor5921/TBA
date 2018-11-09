@@ -32,6 +32,10 @@ public class Runner
             building[a][b] = new FightRoom(a, b);
         }
 
+        int i = (int)(Math.random()*building.length);
+        int j = (int)(Math.random()*building.length);
+        building[i][j] = new HintRoom(i,j);
+
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
         building[x][y] = new WinningRoom(x,y);
