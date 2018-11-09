@@ -67,6 +67,7 @@ public class Runner
                 {
                     player1.health -= Math.random()*5;
                     System.out.println("You have defeated the monster, your health is now " + player1.health);
+                    building[player1.getxLoc()][player1.getyLoc()] = new Room(player1.getxLoc(), player1.getyLoc());
                     player1.inCombat = false;
                 }
                 else if(canMove(move, player1, building))
