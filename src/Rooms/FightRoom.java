@@ -2,23 +2,25 @@ package Rooms;
 
 import People.Player;
 
-public class HintRoom extends Room
+public class FightRoom extends Room
 {
-    public HintRoom(int x, int y)
+    public FightRoom(int x, int y)
     {
         super(x,y);
     }
 
     public void enterRoom(Player x)
     {
-        System.out.println("Welcome to the hint room, the X coordinate of the Winning Room is " + WinningRoom.xLoc);
+        System.out.println("You have encountered a monster! Press F to fight it or move in any direction to run away!");
         occupant = x;
+        x.inCombat = true;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
     }
 
     public void leaveRoom(Player x)
     {
+        x.inCombat = false;
         occupant = null;
     }
 }

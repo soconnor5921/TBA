@@ -21,7 +21,7 @@ public class Room
         x.setyLoc(this.yLoc);
     }
 
-    public void leaveRoom()
+    public void leaveRoom(Player x)
     {
         occupant = null;
     }

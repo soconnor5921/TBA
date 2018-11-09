@@ -1,6 +1,7 @@
 package Game;
 
 import People.Player;
+import Rooms.FightRoom;
 import Rooms.HintRoom;
 import Rooms.Room;
 import Game.Board;
@@ -24,10 +25,17 @@ public class Runner
         }
 
 
+        for(int i = 0; i < 8; i++)
+        {
+            int a = (int) (Math.random() * building.length);
+            int b = (int) (Math.random() * building.length);
+            building[a][b] = new FightRoom(a, b);
+        }
 
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
         building[x][y] = new WinningRoom(x,y);
+
 
         System.out.println("What is your name?");
         Scanner in = new Scanner(System.in);
@@ -41,24 +49,51 @@ public class Runner
 
         while(gameOn)
         {
-            //System.out.println("Hello " + name + ", move in your preferred direction using the 'W A S D' keys, or press M to show the map.");
             String move = in.nextLine();
             move = move.trim();
 
-
-            if(canMove(move, player1, building))
+            if(player1.health == 0)
             {
-                System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
-                System.out.println(Board.printMap(building, player1));
+                gameOff();
             }
-            else if(move.equalsIgnoreCase("m"))
+
+            if(player1.inCombat)
             {
-                System.out.println(Board.printMap(building, player1));
+                if(move.equalsIgnoreCase("f"))
+                {
+                    player1.health -= Math.random()*5;
+                    System.out.println("You have defeated the monster, your health is now " + player1.health);
+                    player1.inCombat = false;
+                }
+                else if(canMove(move, player1, building))
+                {
+                    player1.health -= (Math.random()*2);
+                    System.out.println("You ran away from the monster but it managed to attack you. Your health is now " + player1.health);
+                    player1.inCombat = false;
+                }
+                else
+                {
+                    System.out.println("The monster is getting closer! Choose to fight it or run away!");
+                }
             }
             else
             {
-                System.out.println("Please stay in the playable area. Pick another direction");
+                if(canMove(move, player1, building))
+                {
+                    System.out.println("You are now at coordinates x= " + player1.getxLoc() + " y= " + player1.getyLoc());
+                    System.out.println(Board.printMap(building, player1));
+                }
+                else if(move.equalsIgnoreCase("m"))
+                {
+                    System.out.println(Board.printMap(building, player1));
+                }
+                else
+                {
+                    System.out.println("Please stay in the playable area. Pick another direction");
+                }
+
             }
+
         }
     }
 
@@ -76,25 +111,25 @@ public class Runner
 
         if(move.equals("w") && x != 0)
         {
-            map[x][y].leaveRoom();
+            map[x][y].leaveRoom(p);
             map[x-1][y].enterRoom(p);
             return true;
         }
         else if(move.equals("a") && y != 0)
         {
-            map[x][y].leaveRoom();
+            map[x][y].leaveRoom(p);
             map[x][y-1].enterRoom(p);
             return true;
         }
         else if(move.equals("s") && x != 4)
         {
-           map[x][y].leaveRoom();
+           map[x][y].leaveRoom(p);
            map[x+1][y].enterRoom(p);
             return true;
         }
         else if(move.equals("d") && y != 4)
         {
-            map[x][y].leaveRoom();
+            map[x][y].leaveRoom(p);
             map[x][y+1].enterRoom(p);
             return true;
         }
